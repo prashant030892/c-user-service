@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.centime</groupId>
-	<artifactId>UserService</artifactId>
+	<artifactId>user-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>UserService</name>
-	<description>Demo project for Spring Boot</description>
+	<name>user-service</name>
+	<description>User Service</description>
 
 	<properties>
 		<java.version>11</java.version>
