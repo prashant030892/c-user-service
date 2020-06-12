@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -45,8 +46,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		Map<String, Object> body = createBody(status);
 
 		// Get all validation errors
-		List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(x -> x.getDefaultMessage())
-				.collect(Collectors.toList());
+		List<String> errors = ex.getBindingResult().getAllErrors().stream()
+				.map(x -> ((FieldError) x).getField() + " " + x.getDefaultMessage()).collect(Collectors.toList());
 
 		body.put("validationErrors", errors);
 
@@ -86,7 +87,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	 */
 	@ExceptionHandler
 	public ResponseEntity<Object> universalHandler(Exception ex) {
-		log.error("Exception occurred",ex);
+		log.error("Exception occurred", ex);
 		return createErrorObject("Unknown error ocurred. Please try again", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 

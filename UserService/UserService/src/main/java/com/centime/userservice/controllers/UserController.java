@@ -38,7 +38,7 @@ public class UserController {
 	}
 
 	@LogMethodParam
-	@Operation(summary = "Greet the user passed. Prepend greeting and concatenate the user name and surname ")
+	@Operation(summary = "Greet the user passed. Prepend greeting and concatenate the user name and surname. The name parameter is mandatory.")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "User greeted successfully", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Requested resource not found", content = @Content),
